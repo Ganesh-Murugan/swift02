@@ -340,6 +340,14 @@ struct CustomerDetails {
  
 }
 
+struct PurchaseDetails {
+    var name: String
+    var quantity: Int
+    var price: Int
+    var totalPrice: Int
+
+}
+
 class MainMenu{
     
     func home(){
@@ -376,15 +384,6 @@ class MainMenu{
 }
     
 }
-struct PurchaseDetails {
-    var name: String
-    var quantity: Int
-    var price: Int
-    var totalPrice: Int
-
-}
-
-
 
 let stocksList = [ Stock(stockName: "cheese", price: 20, stockQuantity: 2, place: "Chennai"),
                    Stock(stockName: "milk", price: 30, stockQuantity: 4, place: "Tirunelveli"),
