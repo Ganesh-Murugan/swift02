@@ -243,15 +243,6 @@ class Stock {
     var totalPrice: Int{
         get { return purchasedQuantity * price }
     }
-    // var setNewStocksQuantity: Int {
-    //     get {return 0}
-    //     set(value){
-    //         newStocksQuantity += value
-    //     }
-    // }
-    // var totalPurchasedPrice: Int{
-    //     get { return newStocksQuantity * price }
-    // }
     
     init(stockName: String, price: Int, stockQuantity: Int, place: String){
         self.stockName = stockName
