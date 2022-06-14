@@ -87,10 +87,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UISearchBa
 //            contactTable.beginUpdates()
            // contactList.remove(at: indexPath.row)
 //            contactDict.remove(at: )
-            var removed = contactDict[sectionTitle[indexPath.section]]
+            var filtered = contactDict[sectionTitle[indexPath.section]]
            // removed?[indexPath.row]
-            let removeItem = removed?.remove(at: indexPath.row)
-            contactDict[sectionTitle[indexPath.section]] = removeItem
+            let removeItem = filtered?.remove(at: indexPath.row)
+            contactDict[sectionTitle[indexPath.section]] = filtered
             //1
             contactTable.deleteRows(at: [indexPath], with: .automatic)
 //            contactTable.reloadData()
