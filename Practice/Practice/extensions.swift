@@ -13,23 +13,28 @@ extension Int {
     }
 }
 
-extension Optional where Wrapped == String {
+extension Optional {
     var unwrap: String {
-        guard let self = self else { return "unknown" }
-        return self
+        guard let self = self else { return "Unknown" }
+        return self as! String
+    }
+    var intUnwrap: Int {
+        guard let self = self else { return 0 }
+        return self as! Int
     }
 }
 
-extension Array where Element: Equatable {
-    func searchFilter(searchText: String) -> [Contacts] {
-        return contactList.filter { searchText.isEmpty || (($0.name.unwrap).localizedStandardContains(searchText)) ||
+extension Array where Element == Contact {
+    func searchFilter(searchText: String) -> [Contact] {
+        return self.filter { searchText.isEmpty || (($0.name.unwrap).localizedStandardContains(searchText)) ||
             (($0.number?.toString).unwrap).localizedStandardContains(searchText)                                    }
     }
     
     func sort<T: Comparable>(_ property: (Element) -> T) -> [Element] {
-        return sorted(by: {property($0) < property($1)})
+        return self.sorted(by: {property($0) < property($1)})
     }
 }
+
 extension Array {
     func unique(_ selector:(Element,Element)->Bool) -> Array<Element> {
         return reduce(Array<Element>()){

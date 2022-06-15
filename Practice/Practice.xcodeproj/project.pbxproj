@@ -13,9 +13,10 @@
 		C349BFEE285327EE00EC0596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C349BFEC285327EE00EC0596 /* Main.storyboard */; };
 		C349BFF0285327EF00EC0596 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C349BFEF285327EF00EC0596 /* Assets.xcassets */; };
 		C349BFF3285327EF00EC0596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C349BFF1285327EF00EC0596 /* LaunchScreen.storyboard */; };
-		C349C000285354E500EC0596 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349BFFF285354E500EC0596 /* Contacts.swift */; };
+		C349C000285354E500EC0596 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349BFFF285354E500EC0596 /* Contact.swift */; };
 		C349C003285369AB00EC0596 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349C002285369AB00EC0596 /* extensions.swift */; };
 		C349C006285373B400EC0596 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C349C005285373B400EC0596 /* ContactCell.swift */; };
+		C3B01A752859F63800310452 /* ContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B01A742859F63800310452 /* ContactList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +28,10 @@
 		C349BFEF285327EF00EC0596 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C349BFF2285327EF00EC0596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C349BFF4285327EF00EC0596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C349BFFF285354E500EC0596 /* Contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contacts.swift; path = ../../tableview/TableCreation/TableCreation/Contacts.swift; sourceTree = "<group>"; };
+		C349BFFF285354E500EC0596 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = ../../tableview/TableCreation/TableCreation/Contact.swift; sourceTree = "<group>"; };
 		C349C002285369AB00EC0596 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		C349C005285373B400EC0596 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		C3B01A742859F63800310452 /* ContactList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +69,8 @@
 				C349BFEA285327EE00EC0596 /* ViewController.swift */,
 				C349C005285373B400EC0596 /* ContactCell.swift */,
 				C349C002285369AB00EC0596 /* extensions.swift */,
-				C349BFFF285354E500EC0596 /* Contacts.swift */,
+				C3B01A742859F63800310452 /* ContactList.swift */,
+				C349BFFF285354E500EC0596 /* Contact.swift */,
 				C349BFEC285327EE00EC0596 /* Main.storyboard */,
 				C349BFEF285327EF00EC0596 /* Assets.xcassets */,
 				C349BFF1285327EF00EC0596 /* LaunchScreen.storyboard */,
@@ -148,8 +151,9 @@
 			files = (
 				C349C006285373B400EC0596 /* ContactCell.swift in Sources */,
 				C349C003285369AB00EC0596 /* extensions.swift in Sources */,
-				C349C000285354E500EC0596 /* Contacts.swift in Sources */,
+				C349C000285354E500EC0596 /* Contact.swift in Sources */,
 				C349BFEB285327EE00EC0596 /* ViewController.swift in Sources */,
+				C3B01A752859F63800310452 /* ContactList.swift in Sources */,
 				C349BFE7285327EE00EC0596 /* AppDelegate.swift in Sources */,
 				C349BFE9285327EE00EC0596 /* SceneDelegate.swift in Sources */,
 			);

@@ -18,4 +18,10 @@ class ContactCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    func add(_ index: Contact)  {
+        name?.text = index.name
+        number?.text = index.number?.toString
+        emailId?.text = index.emailId
+    }
+    
 }

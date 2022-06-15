@@ -4,98 +4,135 @@
 //
 //  Created by zoho on 10/06/22.
 //
-
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
     let searchController = UISearchController()
-    var searching = false
-    var searchResult = [Contacts]()
-    @IBOutlet weak var contactTable: UITableView!
-//    override func viewWillAppear(_ animated: Bool) {
-//            super.viewWillAppear(animated)
-//        view.backgroundColor = UIColor.red
-//            print("viewWillAppear(_:) called")
-//        }
-//
-//        override func viewDidAppear(_ animated: Bool) {
-//            super.viewDidAppear(animated)
-//            view.backgroundColor = UIColor.yellow
-//            print("viewDidAppear(_:) called")
-//        }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Contacts"
+    var sectionTitle = sortedList.map({$0.firstLetter}).unique({$0 == $1})
+    
+    var searching: Bool{
+        (searchController.searchBar.text).unwrap.isEmpty ?  false : true
+    }
+    var contactDict = [String: [Contact]]()
+    var searchResult = sortedList
+
+    @IBOutlet weak var contactTable: UITableView!
+    
+    @IBAction func didEditStart(){
+        contactTable.isEditing.toggle()
+    }
+//    func getGroups() -> [String]{
+//        list.{}
+//    }
+    
+    func setSearchControllerProperties() {
         searchController.loadViewIfNeeded()
         searchController.searchBar.placeholder = "Search.."
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
-        contactTable.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Contacts"
+        setSearchControllerProperties()
         contactTable.dataSource = self
-        sectionTitle.forEach({contactDict[String($0)] = [Contacts]()})
-        contactList.forEach({contactDict[String($0.name.unwrap.prefix(1))]?.append($0)})
+        sectionTitle.forEach({contactDict[$0] = [Contact]()})
+        sortedList.forEach({contactDict[$0.firstLetter]?.append($0)})
     }
 }
-
-extension ViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
-    
+//protocol Mine {
+//    func callME()
+//}
+//class Senthil:NSObject,UITableViewDelegate{
+//
+//    override init() {
+//        super.init()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//}
+//extension ViewController:UITableViewDataSource{
+//
+//}
+extension ViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return !searching ? sectionTitle.count : 1
+        return searching ? 1 : contactDict.keys.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return !searching ? sectionTitle[section] : "Search Result"
+        return searching ?  "Search Result" : sectionTitle[section]
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return !searching ? contactDict[sectionTitle[section]]?.count ?? 0 : searchResult.count
+        return searching ? searchResult.count : (contactDict[sectionTitle[section]]?.count).intUnwrap
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = contactTable.dequeueReusableCell(withIdentifier: "newIdentifier", for: indexPath) as! ContactCell
-        let list = !searching ? contactDict[sectionTitle[indexPath.section]]! : searchResult
-        
-        cell.name?.text = list[indexPath.row].name
-        cell.number?.text = list[indexPath.row].number?.toString
-        cell.emailId?.text = list[indexPath.row].emailId
+        let list = !searching ? contactDict[sectionTitle[indexPath.section]] : searchResult
+        if let list = list {
+            cell.add(list[indexPath.row])
+        }
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected one of the cell, \(indexPath)")
     }
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        searching ? .none : .delete
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        contactDict[sectionTitle[sourceIndexPath.section]]?.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        
+        let rows = self.tableView(contactTable, numberOfRowsInSection: sourceIndexPath.section)
+        if proposedDestinationIndexPath.section != sourceIndexPath.section{
+            let rowInSourceSection = (sourceIndexPath.section > proposedDestinationIndexPath.section) ? 0 : rows - 1;
+                  return IndexPath(row: rowInSourceSection, section: sourceIndexPath.section)
+        }
+        return proposedDestinationIndexPath
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let removed = contactDict[sectionTitle[indexPath.section]]?.remove(at: indexPath.row)
+            
+            if contactDict[sectionTitle[indexPath.section]]?.isEmpty ?? true {
+                contactDict.removeValue(forKey: (removed?.firstLetter).unwrap)
+                sectionTitle.removeAll(where: {$0 == (removed?.firstLetter).unwrap})
+                contactTable.deleteSections([indexPath.section], with: .fade)
+            } else {
+                contactTable.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+}
+
+extension ViewController: UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             return
         }
+        var dictValues = [Contact]()
+        for value in contactDict.values{
+            value.forEach{dictValues.append($0)}
+        }
         if !text.isEmpty {
-            searching = true
-            searchResult = contactList.searchFilter(searchText: text)
+            searchResult = dictValues.searchFilter(searchText: text)
         } else {
-            searching = false
             searchResult.removeAll()
-            searchResult = contactList
+            searchResult = dictValues
         }
         contactTable.reloadData()
     }
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        .delete
-    }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete{
-//            contactTable.beginUpdates()
-           // contactList.remove(at: indexPath.row)
-//            contactDict.remove(at: )
-            var filtered = contactDict[sectionTitle[indexPath.section]]
-            filtered?.remove(at: indexPath.row)
-            contactDict[sectionTitle[indexPath.section]] = filtered
-            contactTable.deleteRows(at: [indexPath], with: .automatic)
-//            contactTable.reloadData()
-//            contactTable.endUpdates()
-        }
-        
-    }
 }
-
-
