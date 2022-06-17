@@ -46,8 +46,8 @@
             filePath = "Practice/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -140,8 +140,8 @@
             filePath = "Practice/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -172,8 +172,8 @@
             filePath = "Practice/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "tableView(_:editingStyleForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -188,9 +188,257 @@
             filePath = "Practice/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7BD86048-0E5E-4350-97AC-ED16F9C4A786"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Practice/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "7BD86048-0E5E-4350-97AC-ED16F9C4A786 - 2af7448ccc014f8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactDict.getter : Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Practice.Contact&gt;&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "122">
+               </Location>
+               <Location
+                  uuid = "7BD86048-0E5E-4350-97AC-ED16F9C4A786 - 2af7448ccc014f8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactDict.setter : Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Practice.Contact&gt;&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "7BD86048-0E5E-4350-97AC-ED16F9C4A786 - 62b7f2c4c896fdd1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactDict.modify : Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Practice.Contact&gt;&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "7BD86048-0E5E-4350-97AC-ED16F9C4A786 - 93bd1d313d41fd28"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactDict.modify : Swift.Dictionary&lt;Swift.String, Swift.Array&lt;Practice.Contact&gt;&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "7BD86048-0E5E-4350-97AC-ED16F9C4A786 - c4e96e553745a8c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Practice.ViewController"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "815">
+               </Location>
+               <Location
+                  uuid = "7BD86048-0E5E-4350-97AC-ED16F9C4A786 - a44360cbebf0ddf9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Practice.ViewController&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "784">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F6D15BA0-71BC-476F-AFF9-5B2BF81D79E2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Practice/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AD16A238-2442-4E57-B50B-5839032215FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Practice/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "AD16A238-2442-4E57-B50B-5839032215FC - 23da03b5d6e66873"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactTable.getter : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "AD16A238-2442-4E57-B50B-5839032215FC - ed2089d19926bc67"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactTable.setter : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "155">
+               </Location>
+               <Location
+                  uuid = "AD16A238-2442-4E57-B50B-5839032215FC - f8131f93223aa5c0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactTable.modify : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  uuid = "AD16A238-2442-4E57-B50B-5839032215FC - 9311f02cce7a6ce8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.contactTable.modify : Swift.Optional&lt;__C.UITableView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "AD16A238-2442-4E57-B50B-5839032215FC - c4e96e553745a824"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Practice.ViewController"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1128">
+               </Location>
+               <Location
+                  uuid = "AD16A238-2442-4E57-B50B-5839032215FC - a44360cbebf0dd1e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Practice.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Practice.ViewController&gt;"
+                  moduleName = "Practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zoho/Documents/Practice/Practice/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1091">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F4DF481-4956-471A-A8F9-4664BC05D080"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Practice/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "setSearchControllerProperties()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

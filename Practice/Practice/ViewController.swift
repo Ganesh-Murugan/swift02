@@ -14,18 +14,15 @@ class ViewController: UIViewController, UITableViewDataSource {
     var searching: Bool{
         (searchController.searchBar.text).unwrap.isEmpty ?  false : true
     }
-    var contactDict = [String: [Contact]]()
+    var contactDict: [String: [Contact]] = Dictionary(grouping: sortedList, by: {$0.firstLetter})
     var searchResult = sortedList
-
+    
     @IBOutlet weak var contactTable: UITableView!
     
     @IBAction func didEditStart(){
         contactTable.isEditing.toggle()
     }
-//    func getGroups() -> [String]{
-//        list.{}
-//    }
-    
+
     func setSearchControllerProperties() {
         searchController.loadViewIfNeeded()
         searchController.searchBar.placeholder = "Search.."
@@ -40,8 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         title = "Contacts"
         setSearchControllerProperties()
         contactTable.dataSource = self
-        sectionTitle.forEach({contactDict[$0] = [Contact]()})
-        sortedList.forEach({contactDict[$0.firstLetter]?.append($0)})
+        contactTable.delegate = self
     }
 }
 //protocol Mine {
@@ -63,13 +59,15 @@ class ViewController: UIViewController, UITableViewDataSource {
 //}
 extension ViewController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return searching ? 1 : contactDict.keys.count
+        return searching ? 1 : sectionTitle.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return searching ?  "Search Result" : sectionTitle[section]
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searching ? searchResult.count : (contactDict[sectionTitle[section]]?.count).intUnwrap
+        return searching ? searchResult.count :
+            
+            (contactDict[sectionTitle[section]]?.count).intUnwrap
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,8 +83,11 @@ extension ViewController: UITableViewDelegate {
         print("selected one of the cell, \(indexPath)")
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        !searching
+    }
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        searching ? .none : .delete
+        .delete
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -114,7 +115,7 @@ extension ViewController: UITableViewDelegate {
             } else {
                 contactTable.deleteRows(at: [indexPath], with: .fade)
             }
-        }
+        } else {return}
     }
 }
 

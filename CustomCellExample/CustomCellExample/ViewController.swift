@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     @IBOutlet var settingsTableView: UITableView!
     
     override func viewDidLoad() {
