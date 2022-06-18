@@ -20,7 +20,7 @@ struct Settings: Equatable {
     
 }
 
-protocol Cell {
+protocol Cell: UITableViewCell {
     var settingName: UILabel { get }
     var settingDescription: UILabel { get }
 //    func setNameConstraints()
