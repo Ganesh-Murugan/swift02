@@ -6,29 +6,22 @@
 //
 
 import UIKit
-public enum State : Int {
-   case active
-   case inactive
-   case background
-}
+
 class ViewController: UIViewController {
-    
-    var content = settings
-    let settingView = UITableView()
-    var header = "Settings"
+
+    var content = [Settings]()
+    var header = String()
+    private let settingView = UITableView()
     
     private func setupTableView() {
-        
-        settingView.tableFooterView = UIView()
         settingView.frame = view.bounds
+        settingView.clipsToBounds = true
         settingView.delegate = self
         settingView.dataSource = self
-        
-        settingView.register(SwitchCell.self, forCellReuseIdentifier: "switchcell")
-        settingView.register(IconCell.self, forCellReuseIdentifier: "iconcell")
-        settingView.register(SliderCell.self, forCellReuseIdentifier: "slidercell")
+        settingView.register(SwitchCell.self, forCellReuseIdentifier: "switchCell")
+        settingView.register(IconCell.self, forCellReuseIdentifier: "iconCell")
+        settingView.register(SliderCell.self, forCellReuseIdentifier: "sliderCell")
         settingView.register(DescriptiveCell.self, forCellReuseIdentifier: "descriptiveCell")
-        
     }
     
     @objc func doSomething() {
@@ -36,36 +29,39 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let notificationCenter = NotificationCenter.default
-//            notificationCenter.addObserver(self, selector: #selector(doSomething), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        let notificationCenter = NotificationCenter.default
+            notificationCenter.addObserver(self, selector: #selector(doSomething), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.removeObserver(notificationCenter)
         print("viewDidLoad")
         setupTableView()
-        settingView.clipsToBounds = true
         view.addSubview(settingView)
+        
         self.title = header
         
     }
-    override func viewDidLayoutSubviews() {
-        print("viewDidLayoutSubviews")
-    }
-    override func viewWillLayoutSubviews() {
-        print("viewWillLayoutSubviews")
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        print("viewDidAppear")
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        print("viewWillDisappear")
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        print("viewDidDisappear")
-    }
+    
+//    override func viewDidLayoutSubviews() {
+//        print("viewDidLayoutSubviews")
+//    }
+//    override func viewWillLayoutSubviews() {
+//        print("viewWillLayoutSubviews")
+//    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        print("viewWillAppear")
+//    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        print("viewDidAppear")
+//    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        print("viewWillDisappear")
+//    }
+//    override func viewDidDisappear(_ animated: Bool) {
+//        print("viewDidDisappear")
+//    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         content.count
     }
@@ -73,7 +69,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let type = settings[indexPath.row].settingType
         switch type {
         case .toggle(_):
-            return 90
+            return 100
         case .navigate:
             return 80
         case .slider:
@@ -83,8 +79,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func addCell(tableView: UITableView, indexPath: IndexPath, id: String) -> Cell {
-        
+    private func addCell(tableView: UITableView, indexPath: IndexPath, id: String) -> Cell {
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as! Cell
         cell.addCell(content[indexPath.row])
         return cell
@@ -94,10 +89,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let type = content[indexPath.row].settingType
         
         switch type {
-        case .navigate(_):
-            return addCell(tableView: tableView, indexPath: indexPath, id: "iconcell") as! IconCell
+        case .navigate:
+            return addCell(tableView: tableView, indexPath: indexPath, id: "iconCell") as! IconCell
         case .toggle(let toggled):
-            let cell = addCell(tableView: tableView, indexPath: indexPath, id: "switchcell") as! SwitchCell
+            let cell = addCell(tableView: tableView, indexPath: indexPath, id: "switchCell") as! SwitchCell
             cell.toggle.setOn(toggled, animated: true)
             return cell
         case .slider(let value):
@@ -115,7 +110,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         case .toggle(_):
             if let cell = settingView.cellForRow(at: indexPath) as? SwitchCell {
                 type = .toggle(!cell.toggle.isOn)
-                cell.toggled()
+                cell.toggled(!cell.toggle.isOn)
             }
             print(type)
         case .slider(_):
@@ -127,18 +122,47 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             print(indexPath)
             
         case .navigate(let navigateTo):
-            let viewController = ViewController()
-            switch navigateTo {
-            case .displaySettings:
-                viewController.content = displaySettings
-                viewController.header = "Display Settings"
-                self.navigationController?.pushViewController(viewController, animated: true)
-            case .about:
-                viewController.content = about
-                viewController.title = "About"
-                self.navigationController?.pushViewController(viewController, animated: true)
-            }
+            navigation(navigateTo)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    private func navigation(_ navigateTo: Navigate) {
+        let viewController = ViewController()
+        switch navigateTo {
+        case .displaySettings:
+            viewController.content = displaySettings
+            viewController.header = "Display Settings"
+        case .about:
+            viewController.content = about
+            viewController.header = "About"
+        }
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
 }
+
+
+
+//var footerView: UIView = {
+//    let view = UIView()
+//    view.frame = CGRect(x: 250, y: 400, width: 100, height: 100)
+//    view.backgroundColor = .blue
+//    return view
+//}()
+//private func checkBounds() {
+//    let testView = UIView(frame: CGRect(x: self.footerView.frame.origin.x,
+//                                        y: self.footerView.frame.origin.y,
+//                                        width: self.footerView.frame.size.width,
+//                                        height: self.footerView.frame.size.height))
+//    testView.layer.borderColor = UIColor.green.cgColor
+//    testView.layer.borderWidth = 2
+//    settingView.addSubview(testView)
+//    settingView.addSubview(footerView)
+//    print(testView.bounds)
+//    print(footerView.bounds)
+//    footerView.layer.borderColor = UIColor.red.cgColor
+//    footerView.layer.borderWidth = 2
+//    footerView.transform = CGAffineTransform(rotationAngle: 10)
+//    print(testView.bounds)
+//    print(footerView.bounds)
+//}

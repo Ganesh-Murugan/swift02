@@ -36,7 +36,7 @@ var settings = [
 
 var displaySettings = [
     Settings(settingName: "brightness", settingType: .slider(0.2), settingDescription: "Adjust brightness"),
-    Settings(settingName: "OutDoor mode", settingType: .toggle(false), settingDescription: "make the screen brighter for outdoor view"),
+    Settings(settingName: "OutDoor mode", settingType: .toggle(false), settingDescription: "make the screen brighter for outdoor view make the screen brighter for outdoor view"),
     Settings(settingName: "blue light filter", settingType: .toggle(false), settingDescription: "filter blue light")
 ]
 

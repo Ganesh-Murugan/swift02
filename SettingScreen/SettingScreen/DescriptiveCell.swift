@@ -18,8 +18,8 @@ class DescriptiveCell: UITableViewCell, Cell {
         contentView.addSubview(settingName)
         contentView.addSubview(settingDescription)
         contentView.addSubview(iconView)
-        settingName.body()
-        settingDescription.caption()
+        settingName.setFont(.body)
+        settingDescription.setFont(.caption)
     }
     
     required init?(coder: NSCoder) {

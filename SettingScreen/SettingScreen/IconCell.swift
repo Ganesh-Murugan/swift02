@@ -13,26 +13,27 @@ class IconCell: UITableViewCell, Cell {
     var settingDescription = UILabel()
     var arrowIcon = UIImageView(image: UIImage(named: "chevron.png"))
     
-    let screenHeight = UIScreen.main.bounds.height
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        let contentWidth = contentView.bounds.width
-        let contentHeight = contentView.bounds.height
-        addFrame(contentWidth, contentHeight)
+        
+        contentView.bounds.size.width = UIScreen.main.bounds.width
         contentView.addSubview(settingName)
         contentView.addSubview(settingDescription)
         contentView.addSubview(arrowIcon)
-        settingName.body()
-        settingDescription.caption()
+        settingName.setFont(.body)
+        settingDescription.setFont(.caption)
+        addFrame(contentView.bounds)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    private func addFrame(_ contentWidth: CGFloat, _ contentHeight: CGFloat) {
-        arrowIcon.frame = CGRect(x: contentWidth + 45, y: 15, width: 35, height: 35)
-        settingName.frame = CGRect(x: 15, y: contentHeight/2.8, width: contentWidth, height: 20)
-        settingDescription.frame = CGRect(x: 15, y: contentHeight/1.1, width: contentWidth, height: 15)
+    
+    private func addFrame(_ contentBounds: CGRect) {
+        arrowIcon.frame = CGRect(x: contentBounds.width - 70, y: 15, width: 35, height: 35)
+        settingName.frame = CGRect(x: 15, y: contentBounds.height/2.8, width: contentBounds.width, height: 20)
+        settingDescription.frame = CGRect(x: 15, y: contentBounds.height/1.1, width: contentBounds.width, height: 15)
     }
 }
 
