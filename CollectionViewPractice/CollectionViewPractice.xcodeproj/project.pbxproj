@@ -45,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C3CECB4228631BF4003D6744 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				C3E1CB1528619B8900947C14 /* Identifiers.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		C3E1CAEE286195B600947C14 = {
 			isa = PBXGroup;
 			children = (
@@ -64,9 +72,9 @@
 		C3E1CAF9286195B600947C14 /* CollectionViewPractice */ = {
 			isa = PBXGroup;
 			children = (
+				C3CECB4228631BF4003D6744 /* Constants */,
 				C3E1CAFA286195B600947C14 /* AppDelegate.swift */,
 				C3E1CAFC286195B600947C14 /* SceneDelegate.swift */,
-				C3E1CB1528619B8900947C14 /* Identifiers.swift */,
 				C3E1CAFE286195B600947C14 /* ViewController.swift */,
 				C3E1CB222861D8A200947C14 /* extensions.swift */,
 				C3E1CB0F286196AC00947C14 /* CalculatorCollectionViewCell.swift */,

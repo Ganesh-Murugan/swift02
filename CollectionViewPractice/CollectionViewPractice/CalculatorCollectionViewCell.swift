@@ -9,26 +9,36 @@ import UIKit
 
 class CalculatorCollectionViewCell: UICollectionViewCell {
 
-    var cellValue: UIButton = {
-        let cell = UIButton()
+    var cellView: UIView = {
+        let cell = UIView()
         cell.backgroundColor = .white
-        cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.gray.cgColor
-        cell.titleLabel?.textAlignment = .center
-        cell.setTitleColor(.black, for: .normal)
+        cell.layer.borderWidth = 0.2
+        cell.layer.borderColor = UIColor.brown.cgColor
         return cell
+    }()
+    
+    var cellLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 45, y: 45, width: 20, height: 20))
+        label.textColor = .black
+        label.setFont(.body)
+        return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        cellValue.frame = CGRect(x: 10, y: 10, width: contentView.bounds.width, height: contentView.bounds.height)
-        contentView.addSubview(cellValue)
+        cellView.addSubview(cellLabel)
+        cellView.frame = CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height)
+        contentView.addSubview(cellView)
   
 
     }
     
     required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addLabel(_ type: [Calculator],_ indexPath: Int) {
+        self.cellLabel.text = type[indexPath].value
     }
 }
 
