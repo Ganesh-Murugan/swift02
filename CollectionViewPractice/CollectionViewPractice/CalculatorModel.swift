@@ -6,10 +6,13 @@
 //
 import Foundation
 
-enum Operators: String, CaseIterable {
-    case addition = "+", multiplication = "*", division = "/", subtraction = "-", mod = "%", dot = ".", equal = "=", clear = "c"
+enum Operators: String {
+    case addition = "+", multiplication = "*", division = "/", subtraction = "-", mod = "%", dot = ".", equal = "=", clear = "c", backSpace = "<"
+    
+    static let rawValues = ["+","-","*",".","/","=","<"]
 }
-enum cellType {
+
+enum cellType: Equatable {
     case numeric, Operations(_ operators: Operators)
 }
 
@@ -22,7 +25,7 @@ struct CalculatorCells {
     var values = [Calculator(value: "c", type: .Operations(.clear)),
                   Calculator(value: "=", type: .Operations(.equal)),
                   Calculator(value: "/", type: .Operations(.division)),
-                  Calculator(value: "-", type: .Operations(.mod)),
+                  Calculator(value: "-", type: .Operations(.subtraction)),
                   Calculator(value: "1", type: .numeric),
                   Calculator(value: "2", type: .numeric),
                   Calculator(value: "3", type: .numeric),
@@ -34,6 +37,8 @@ struct CalculatorCells {
                   Calculator(value: "7", type: .numeric),
                   Calculator(value: "8", type: .numeric),
                   Calculator(value: "9", type: .numeric),
+                  Calculator(value: "<", type: .Operations(.backSpace)),
+                  Calculator(value: ".", type: .Operations(.dot)),
                   Calculator(value: "0", type: .numeric),
                   ]
 }
