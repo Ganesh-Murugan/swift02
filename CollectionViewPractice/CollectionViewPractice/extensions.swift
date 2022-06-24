@@ -9,13 +9,16 @@ import Foundation
 import UIKit
 
 extension Int {
-    var toString: String  {
+    var formatDecimal: String  {
         String(self)
     }
 }
 extension String {
     var toInt: Int {
         Int(self) ?? 0
+    }
+    var toDouble: Double {
+        Double(self) ?? 0
     }
     func filterNum() -> String {
         return self.filter{ "0123456789".contains($0)}
@@ -52,11 +55,14 @@ extension Double {
     var formatDecimal: String {
         return self.isInteger ? String(format: "%0.0f", self) : String(format: "%0.2f", self)
     }
+    var toString: String  {
+        String(self)
+    }
 }
 
 extension Array where Element == Int {
     var toString: [String] {
-        return self.map({$0.toString})
+        return self.map({$0.formatDecimal})
     }
 }
 

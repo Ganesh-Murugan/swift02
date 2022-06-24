@@ -28,6 +28,7 @@ class CalculatorCollectionViewCell: UICollectionViewCell {
         
         cellView.addSubview(cellLabel)
         cellLabel.frame = CGRect(x: contentView.frame.size.width/2, y: contentView.frame.size.height/2, width: 20, height: 20)
+        
         cellView.frame = CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height)
         contentView.addSubview(cellView)
     }

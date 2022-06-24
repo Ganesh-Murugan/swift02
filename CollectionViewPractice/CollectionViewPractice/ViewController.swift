@@ -10,16 +10,15 @@ import UIKit
 class ViewController: UIViewController {
     private var calculator = CalculatorCells()
     private var values: [Calculator] { calculator.values }
-    private var prevValue = "0"
+    private var prevValue = ""
     { didSet { prevValue = prevValue.removeEqual() } }
-    var nextValue = Int()
-    var newValue = Int()
+    var nextValue = Double()
+    var newValue = Double()
     var prevOperator = String()
     
     private var cellViewlayout: UICollectionViewFlowLayout = {
         var layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
-//        layout.itemSize = CGSize(width: 100, height: 100)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 13.5, bottom: 0, right: 13.5)
         layout.minimumLineSpacing = 0.2
         layout.headerReferenceSize = CGSize(width: 420, height: 340)
@@ -88,119 +87,129 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource,U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let type = values[indexPath.item].type
         textFeild.text += values[indexPath.item].value.removeEqual()
-//        textFeild.text = textFeild.text.removeEqual()
-//        prevValue += values[indexPath.item].value
-//        switch type {
-//        case .numeric:
-//            resultView.text = textFeild.text
-//        case .Operations(.clear):
-//            prevValue = "0"
-//            textFeild.text = ""
-//            resultView.text = ""
-//
-//        case .Operations(.backSpace):
-//            textFeild.text.backSpace(2)
-//            prevValue.backSpace(2)
-//            resultView.text?.backSpace(1)
-//
-//        case .Operations(.equal):
-//            textFeild.text.removeLast()
-//            checkValid(prevValue.suffix(1).toString)
-//            let expression = NSExpression(format: prevValue)
-//            if let value = expression.expressionValue(with: nil, context: nil) as? Double {
-//                resultView.text = value.formatDecimal
-//            }
-//
-//        case .Operations(let operation):
-//            if textFeild.text.count > 1 {
-//                prevValue.convertFloat(operation.rawValue)
-//                checkValid(textFeild.text[textFeild.text.count - 2])
-//            } else {
-//                textFeild.text.removeLast()
-//                prevValue.removeLast()
-//            }
-//        }
-//    }
-//    private func checkValid(_ value: String) {
-//        if Operators.rawValues.contains(value) {
-//            textFeild.text.removeLast()
-//            prevValue.removeLast()
-//        }
-//    }
-//}
-
-
-//        print(prevValue)
+        //        textFeild.text = textFeild.text.removeEqual()
+        //        prevValue += values[indexPath.item].value
+        //        switch type {
+        //        case .numeric:
+        //            resultView.text = textFeild.text
+        //        case .Operations(.clear):
+        //            prevValue = "0"
+        //            textFeild.text = ""
+        //            resultView.text = ""
+        //
+        //        case .Operations(.backSpace):
+        //            textFeild.text.backSpace(2)
+        //            prevValue.backSpace(2)
+        //            resultView.text?.backSpace(1)
+        //
+        //        case .Operations(.equal):
+        //            textFeild.text.removeLast()
+        //            checkValid(prevValue.suffix(1).toString)
+        //            let expression = NSExpression(format: prevValue)
+        //            if let value = expression.expressionValue(with: nil, context: nil) as? Double {
+        //                resultView.text = value.formatDecimal
+        //            }
+        //
+        //        case .Operations(let operation):
+        //            if textFeild.text.count > 1 {
+        //                prevValue.convertFloat(operation.rawValue)
+        //                checkValid(textFeild.text[textFeild.text.count - 2])
+        //            } else {
+        //                textFeild.text.removeLast()
+        //                prevValue.removeLast()
+        //            }
+        //        }
+        //    }
+        //    private func checkValid(_ value: String) {
+        //        if Operators.rawValues.contains(value) {
+        //            textFeild.text.removeLast()
+        //            prevValue.removeLast()
+        //        }
+        //    }
+        //}
+        
+        
+        //        print(prevValue)
+        
         switch type {
         
-        case .numeric:
+        case .numeric, .Operations(.dot):
             if nextValue != 0 {
-                prevValue = nextValue.toString
+                prevValue +=  nextValue.formatDecimal
+                prevValue += values[indexPath.item].value
+                (nextValue, newValue) = (0,0)
+                prevOperator = ""
+            } else {
+                prevValue += values[indexPath.item].value
             }
-            prevValue += values[indexPath.item].value
         case .Operations(.clear):
-            prevValue = "0"
-            textFeild.text = ""
-            resultView.text = ""
-            newValue = 0
+            (textFeild.text, resultView.text, prevOperator, prevValue) = ("","","","")
+            
+            (nextValue, newValue) = (0,0)
+        case .Operations(.backSpace):
+            textFeild.text.backSpace(2)
+            prevValue.backSpace(1)
+            resultView.text?.backSpace(1)
+            
         case .Operations(.equal):
             if Operators.rawValues.contains(textFeild.text.suffix(1).toString){
                 textFeild.text.removeLast()
             }
-            resultView.text = newValue.toString
+            resultView.text = newValue.formatDecimal
             calculation(prevOperator)
-
+            
         case .Operations(let operation):
-            nextValue = 0
-            print("1",newValue, prevValue)
+            if !prevOperator.isEmpty {
+                calculation(prevOperator)
+                textFeild.text += operation.rawValue
+            }
             if textFeild.text.count <= 1 {
                 textFeild.text.removeLast()
             }
+            
+            nextValue = 0
             prevOperator = operation.rawValue
+            
             switch prevOperator {
             case "+":
-                newValue += prevValue.toInt
+                newValue += prevValue.toDouble
             case "-":
-                newValue = prevValue.toInt - newValue
+                newValue = newValue == 0 ? prevValue.toDouble - newValue : newValue - prevValue.toDouble
             case "*":
-                newValue = newValue == 0 ?  prevValue.toInt : newValue
+                newValue = prevValue.toDouble != 0 ? (newValue != 0 ? newValue*prevValue.toDouble : prevValue.toDouble) : newValue
             case "/":
-                
-                if prevValue.toInt != 0{
-                    newValue = prevValue.toInt
-//                    newValue = newValue / (Int(prevValue) ?? 1)
-                }
-            
+                newValue = prevValue.toDouble != 0 ? (newValue != 0 ? newValue/prevValue.toDouble : prevValue.toDouble) : newValue
             default:
                 print("_")
             }
-            print("2",newValue, prevValue)
-            prevValue = "0"
-        
+            prevValue = ""
         }
     }
-
+    
     func calculation(_ operation: String) {
-       print("3",newValue, prevValue)
-        switch operation {
-        case "+":
-            newValue += prevValue.toInt
-        case "-":
-            newValue -= prevValue.toInt
-        case "*":
-            newValue *= prevValue.toInt
-        case "/":
-            if newValue != 0, prevValue.toInt != 0 {
-                newValue /= prevValue.toInt
-            } else { newValue = 0 }
-            
-        default :
-            print("")
+        if prevOperator != "" {
+            switch operation {
+            case "+":
+                newValue += prevValue.toDouble
+            case "-":
+                newValue -=  prevValue.toDouble
+            case "*":
+                newValue *= prevValue.toDouble
+            case "/":
+                newValue = newValue != 0 && prevValue.toDouble != 0 ?
+                    newValue / prevValue.toDouble
+                    :   0
+                
+            default :
+                print("")
+            }
+            (prevValue, prevOperator) = ("","")
+            resultView.text = newValue.formatDecimal
+            nextValue = newValue
+        } else {
+            nextValue = prevValue.toDouble
+            resultView.text = prevValue
         }
-        print("4",newValue, prevValue)
-        nextValue = newValue
-        prevValue = "0"
-        resultView.text = newValue.toString
-        prevOperator = ""
+        textFeild.text = resultView.text
     }
 }
