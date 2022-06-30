@@ -18,10 +18,10 @@ extension Int {
 enum Places: CaseIterable {
     case chennai, tirunelveli, bangalore
     
-    static let placeList: [Places] = Self.allCases
+    // static let placeList: [Places] = Self.allCases
     
     static var printList: Void {
-        Self.placeList.enumerated().forEach({print($0.offset + 1, ": ", $0.element)})
+        Self.allCases.enumerated().forEach({print($0.offset + 1, ": ", $0.element)})
     }
 }
 enum TravelDetail: Equatable {
@@ -49,24 +49,25 @@ protocol Model {
 }
 
 struct BookingModel {
+    var totalSeats: Int = 20
     var from: Places
     var to: Places
     var time: Date
     var occupiedBy = String()
-    var occupiedSeatNumber = Int()
+    var occupiedSeatNumber: Int = 0
+    var occupiedSeatCount: Int = 0
+    var availableSeats: Int { totalSeats - occupiedSeatCount }
+
+    // init(from: Places, to: Places, time: Date){
+    //     self.from = from
+    //     self.to = to
+    //     self.time = time
+    // }
 }
 
 struct BusModel: Model {
     var name: String
-    var totalSeats: Int = 20
-    var availableSeats: Int { 20 }
     var places: [BookingModel]
-    var bookedSeats = [BookedSeat]()
-}
-
-struct BookedSeat {
-    var occupiedBy: UserModel
-    var seatNumber: Int
 }
 
 struct UserModel: Model {
@@ -84,7 +85,8 @@ class BusViewModel {
         busList.printAll()
     }
     func availableBuses(from: Places, destination: Places) -> [BusModel]? {
-        return busList.filterList(from, destination)
+        let filteredList = busList.filterList(from, destination)
+        return filteredList
     }
 }
 
@@ -103,11 +105,6 @@ class UserViewModel {
 extension Array where Element: Model {
     func filterList(_ from: Places, _ to: Places)  -> [BusModel]? {
         let `self` = self as? [BusModel]
-//        var filteredList = self?.map({$0.places.filter({$0.from == from && $0.to == to})})
-//        print(filteredList)
-        
-//        return filteredList
-        var newList = self?.filter({$0.places.contains( where: {$0.from == from && $0.to == to})})
         return self?.filter{$0.places.contains( where: {$0.from == from && $0.to == to})}
     }
     
@@ -157,14 +154,14 @@ class Booking {
     
     private func book() {
         let places = Places.allCases
-        print("Select From Location")
         Places.printList
+        print("Select From Location")
         let fromLocationIndex = readLine().unwrap.toInt - 1
         print("Select Destination Location")
         let toLocationIndex = readLine().unwrap.toInt - 1
         guard toLocationIndex >= 0, toLocationIndex < places.count,
-              fromLocationIndex >= 0, fromLocationIndex < places.count else {
-                  print("index error", fromLocationIndex, toLocationIndex)
+              fromLocationIndex >= 0, fromLocationIndex < places.count,
+              toLocationIndex != fromLocationIndex else {
             return
         }
         guard let bus = BusViewModel().availableBuses(
@@ -172,7 +169,10 @@ class Booking {
         ) else {
             return
         }
-        selectBus(bus)
+        guard let selectedBus = selectBus(bus, places[fromLocationIndex], places[toLocationIndex]) else {
+            return
+        }
+        selectSeat(selectedBus)
     }
 }
 extension Booking {
@@ -185,28 +185,39 @@ extension Booking {
             break
         }
     }
-    private func selectBus(_ bus: [BusModel]) {
+    private func selectBus(_ bus: [BusModel], _ from: Places, _ to: Places) -> BusModel? {
         bus.printAll()
         let selectedBus = readLine().unwrap.toInt - 1
         guard selectedBus >= 0, selectedBus < bus.count else {
-            return
+            return nil
         }
-        selectSeat(bus[selectedBus])
+        // let filteredDetails = bus[selectedBus].places.filter({$0.from == from && $0.to == to})
+        // bus[selectedBus].places = filteredDetails
+        return bus[selectedBus]
     }
     private func selectSeat(_ bus: BusModel) {
-        
-    }
+        // let bookingDetails = bus.
+        let available = "🟩" 
+        let taken = "🟥"
+        var color = ""
+        print(bus.places[0])
+            for seat in 1...bus.places[0].totalSeats {
+                color = bus.places[0].occupiedSeatNumber == seat ? taken : available
+                [4,8,12,16,20].contains(seat) ? print(color, terminator: "\n") : print(color, terminator: "\t")
+            }
+           
+        }
 }
 
 struct BusList {
     static var busList: [BusModel] = [
         BusModel(name: "Sundara travels", places: [
-            BookingModel(from: .bangalore, to: .tirunelveli, time: Date()),
+            BookingModel(from: .bangalore, to: .tirunelveli, time: Date(), occupiedSeatNumber: 2),
             BookingModel(from: .tirunelveli, to: .bangalore, time: Date())
         ]),
         BusModel(name: "Jupyter travels", places: [
-            BookingModel(from: .tirunelveli, to: .chennai, time: Date()),
-            BookingModel(from: .chennai, to: .tirunelveli, time: Date()),
+            BookingModel(from: .tirunelveli, to: .chennai, time: Date(), occupiedSeatNumber: 2),
+            BookingModel(from: .chennai, to: .tirunelveli, time: Date(), occupiedSeatNumber: 2),
             BookingModel(from: .bangalore, to: .chennai, time: Date()),
             BookingModel(from: .chennai, to: .bangalore, time: Date())
         ]),
@@ -218,7 +229,7 @@ struct UserList {
         UserModel(name: "ganesh", password: "123456",
                   userHistory: [
                     BookingModel(from: .tirunelveli, to: .chennai, time: Date()),
-                    BookingModel(from: .tirunelveli, to: .chennai, time: Date())
+                    BookingModel(from: .tirunelveli, to: .chennai, time: Date(), occupiedSeatNumber: 2)
                   ]),
     ]
 }
