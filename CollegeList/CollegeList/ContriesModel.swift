@@ -14,7 +14,7 @@ struct Response: Decodable {
     var data: [String : Countries]? = nil
 }
 
-struct Countries: Decodable {
+struct Countries: Decodable, Data {
     var country: String?
     var region: String?
 }
