@@ -14,21 +14,30 @@ class ViewController: UIViewController {
     var apiHandler = APIHandler()
     var countriesList = [Countries]()
     
+    var isSearching: Bool {
+        !searchController.searchBar.text.unwrap.isEmpty
+    }
+    var searchList = [Countries]()
+    var spinner = SpinnerViewController()
+    let searchController = UISearchController()
     
-    
-    private func setupView(){
+    private func setUpSearchController() {
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+    }
+    private func setupTableView() {
+        title = "Countries"
         view.addSubview(countryTableView)
+        countryTableView.separatorStyle = .none
         view.backgroundColor = .white
-        countryTableView.rowHeight = UITableView.automaticDimension
-        countryTableView.estimatedRowHeight = 100
         countryTableView.delegate = self
         countryTableView.dataSource = self
         countryTableView.register(CountryTableViewCell.self, forCellReuseIdentifier: Constants.Identifiers.countryCellIdentifier)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
+    private func apiFetch(){
+        view.startLoadingIndicator(with: .large, color: .blue)
         apiHandler.fetchCountryData() { [weak self] countries in
             guard let countries = countries?.values else {
                 return
@@ -36,38 +45,61 @@ class ViewController: UIViewController {
             self?.countriesList = Array(countries)
             DispatchQueue.main.async {
                 self?.countryTableView.reloadData()
+                self?.view.stopLoadingIndicator()
+                self?.countryTableView.separatorStyle = .singleLine
             }
         }
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTableView()
+        setUpSearchController()
+        apiFetch()
+    }
+    
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        super.viewDidAppear(animated)
+    //        if countriesList.isEmpty { self.view.startLoadingIndicator(with: .large, color: .blue) }
+    //    }
+    
     override func viewDidLayoutSubviews() {
         countryTableView.frame = view.bounds
     }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        70
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        countriesList.count
+        isSearching ? searchList.count : countriesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.countryCellIdentifier, for: indexPath) as! CountryTableViewCell
-        cell.add(countriesList[indexPath.row])
+        
+        let list = isSearching ? searchList : countriesList
+        cell.addCellView(list[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let vc = CollegeViewController()
-        //        vc.index = indexPath.row
-        //        vc.data = dataSource.data
-        //        self.navigationController?.pushViewController(vc, animated: true)
-        
-        //        let vc = ViewController()
-        //        vc.title = "Colleges"
-        //        self.navigationController?.pushViewController(vc, animated: true)
-        //        vc.dataSource.fetchquery(indexPath.row) {
-        //            DispatchQueue.main.async {
-        //                vc.countryTableView.reloadData()
-        //            }
-        //        }
+        let selectedCountry =  (isSearching ? searchList[indexPath.row] : countriesList[indexPath.row]).country
+        let vc = CollegeViewController()
+        vc.selectedCountry = selectedCountry?.customTrim()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension ViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else {
+            return
+        }
+        if isSearching {
+            searchList = countriesList.filter({$0.country.unwrap.contains(searchText)})
+        }
+        countryTableView.reloadData()
     }
 }

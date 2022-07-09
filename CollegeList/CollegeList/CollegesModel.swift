@@ -6,19 +6,17 @@
 //
 
 import Foundation
-protocol Data {
-    
-}
 
 
 struct CollegeApiResponse: Decodable {
     var colleges: [College]?
 }
 
-struct College: Decodable, Data {
+struct College: Decodable {
     var domains: [String]?
     var webPages: [String]?
     var name: String?
     var country: String?
     var alphaTwoCode: String?
+    
 }

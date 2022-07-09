@@ -14,6 +14,7 @@ struct Constants {
     }
     struct Identifiers {
         static let countryCellIdentifier = "countryCell"
+        static let collegeCellIdentifier = "collegeCell"
     }
     
 }

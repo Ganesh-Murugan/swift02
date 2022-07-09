@@ -5,74 +5,78 @@
 ////  Created by zoho on 06/07/22.
 ////
 //
-//import UIKit
+import UIKit
+
+class CollegeViewController: UIViewController {
+    
+    var colleges: [College] = []
+    var apiHandler = APIHandler()
+    var collegeTableView = UITableView()
+    var selectedCountry: String?
+//    var refreshControl = UIRefreshControl()
+    private func setupView() {
+        view.addSubview(collegeTableView)
+        collegeTableView.alwaysBounceVertical = true
+//        collegeTableView.refreshControl = refreshControl
+//        refreshControl.addTarget(self, action: #selector(refreshColleges(_:)), for: .valueChanged)
+
+        title = "Colleges"
+        view.backgroundColor = .white
+        collegeTableView.separatorStyle = .none
+        collegeTableView.delegate = self
+        collegeTableView.dataSource = self
+        collegeTableView.register(CollegeTableViewCell.self, forCellReuseIdentifier: Constants.Identifiers.collegeCellIdentifier)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        apiHandler.fetchquery(selectedCountry) { [weak self] colleges in
+            self?.colleges = colleges
+            DispatchQueue.main.async {
+                self?.collegeTableView.reloadData()
+            }
+        }
+    }
+    
+    
+//    @objc func refreshColleges(_ sender: Any){
+//        apiHandler.fetchquery(selectedCountry) { [weak self] colleges in
+//            self?.colleges = colleges
+//            DispatchQueue.main.async {
+//                self?.collegeTableView.reloadData()
+////                self?.refreshControl.endRefreshing()
 //
-//class CollegeViewController: UIViewController {
-//    var index: Int = 0
-//    let collegeTableView = UITableView()
-//    var data: [Data] = []
-//    var colleges: [College] = [] 
-//
-//    
-//    private func fetchquery(_ indexPathRow: Int) {
-//        var url = Constants.Urls.collegesUrl
-//        guard let countries = data as? [Countries] else {
-//            return
-//        }
-//        var country = countries[indexPathRow].country.unwrap.replacingOccurrences(of: " ", with: "%20")
-//        country.customTrim()
-//        url += "?country=\(country)"
-//        print(url)
-//            URLSession.shared.request(for: url, expecting: [College].self) { [weak self] result in
-//                switch result {
-//                case .success(let responseData):
-//                    let values = responseData
-//                        self?.colleges = values
-//                    DispatchQueue.main.async {
-//                        self?.collegeTableView.reloadData()
-//                    }
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
 //            }
 //        }
-//    
-//    private func setupView(){
-//        view.addSubview(collegeTableView)
-//        title = "Colleges"
-//        view.backgroundColor = .white
-//        collegeTableView.delegate = self
-//        collegeTableView.dataSource = self
-//        collegeTableView.register(CountryTableViewCell.self, forCellReuseIdentifier: Constants.Identifiers.countryCellIdentifier)
-//    }
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupView()
-//        fetchquery(index)
-//    }
-//    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        collegeTableView.frame = view.bounds
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        
-//    }
-//}
 //
-//extension CollegeViewController: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        colleges.count
 //    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.countryCellIdentifier, for: indexPath) as! CountryTableViewCell
-//        cell.add(colleges[indexPath.row])
-//        return cell
-//    }
-//    
-//    
-//}
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collegeTableView.frame = view.bounds
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if colleges.isEmpty {
+            view.startLoadingIndicator(with: .large, color: .red) }
+    }
+}
+
+extension CollegeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        60
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        colleges.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Identifiers.collegeCellIdentifier, for: indexPath) as! CollegeTableViewCell
+        self.view.stopLoadingIndicator() 
+        tableView.separatorStyle = .singleLine
+        cell.addCellView(colleges[indexPath.row])
+        return cell
+    }
+}

@@ -7,22 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3476B262879AF89002F6FD0 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3476B252879AF89002F6FD0 /* SpinnerViewController.swift */; };
 		C358128C2870276D00463D0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358128B2870276D00463D0F /* AppDelegate.swift */; };
 		C358128E2870276D00463D0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358128D2870276D00463D0F /* SceneDelegate.swift */; };
 		C35812902870276D00463D0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C358128F2870276D00463D0F /* ViewController.swift */; };
 		C35812952870276E00463D0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35812942870276E00463D0F /* Assets.xcassets */; };
 		C35812982870276E00463D0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35812962870276E00463D0F /* LaunchScreen.storyboard */; };
-		C35812A12870287100463D0F /* ContriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35812A02870287100463D0F /* ContriesModel.swift */; };
+		C35812A12870287100463D0F /* CountriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35812A02870287100463D0F /* CountriesModel.swift */; };
 		C35812A428702D0800463D0F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35812A328702D0800463D0F /* Extensions.swift */; };
 		C35812AC28702F2500463D0F /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35812AB28702F2500463D0F /* CountryViewModel.swift */; };
 		C35812AF287037B400463D0F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35812AE287037B400463D0F /* Constants.swift */; };
 		C35812B428704E9500463D0F /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35812B328704E9500463D0F /* CountryTableViewCell.swift */; };
+		C390E78428792BD900175E97 /* CollegeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390E78328792BD900175E97 /* CollegeTableViewCell.swift */; };
 		C39E2F582875866500C40EB3 /* CollegeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39E2F572875866500C40EB3 /* CollegeViewController.swift */; };
 		C39E2F5C2875C84E00C40EB3 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39E2F5B2875C84E00C40EB3 /* APIHandler.swift */; };
 		C3A4838F2872DD9E00C2BA85 /* CollegesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A4838E2872DD9E00C2BA85 /* CollegesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C3476B252879AF89002F6FD0 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		C35812882870276D00463D0F /* CollegeList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollegeList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C358128B2870276D00463D0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C358128D2870276D00463D0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,11 +33,12 @@
 		C35812942870276E00463D0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C35812972870276E00463D0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C35812992870276E00463D0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C35812A02870287100463D0F /* ContriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContriesModel.swift; sourceTree = "<group>"; };
+		C35812A02870287100463D0F /* CountriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesModel.swift; sourceTree = "<group>"; };
 		C35812A328702D0800463D0F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C35812AB28702F2500463D0F /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
 		C35812AE287037B400463D0F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C35812B328704E9500463D0F /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
+		C390E78328792BD900175E97 /* CollegeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeTableViewCell.swift; sourceTree = "<group>"; };
 		C39E2F572875866500C40EB3 /* CollegeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegeViewController.swift; sourceTree = "<group>"; };
 		C39E2F5B2875C84E00C40EB3 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		C3A4838E2872DD9E00C2BA85 /* CollegesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegesModel.swift; sourceTree = "<group>"; };
@@ -73,14 +77,16 @@
 				C358128B2870276D00463D0F /* AppDelegate.swift */,
 				C358128D2870276D00463D0F /* SceneDelegate.swift */,
 				C358128F2870276D00463D0F /* ViewController.swift */,
-				C35812A02870287100463D0F /* ContriesModel.swift */,
+				C35812A02870287100463D0F /* CountriesModel.swift */,
 				C3A4838E2872DD9E00C2BA85 /* CollegesModel.swift */,
 				C35812AB28702F2500463D0F /* CountryViewModel.swift */,
 				C39E2F5B2875C84E00C40EB3 /* APIHandler.swift */,
 				C39E2F572875866500C40EB3 /* CollegeViewController.swift */,
+				C390E78328792BD900175E97 /* CollegeTableViewCell.swift */,
 				C35812B328704E9500463D0F /* CountryTableViewCell.swift */,
 				C35812AE287037B400463D0F /* Constants.swift */,
 				C35812A328702D0800463D0F /* Extensions.swift */,
+				C3476B252879AF89002F6FD0 /* SpinnerViewController.swift */,
 				C35812942870276E00463D0F /* Assets.xcassets */,
 				C35812962870276E00463D0F /* LaunchScreen.storyboard */,
 				C35812992870276E00463D0F /* Info.plist */,
@@ -160,14 +166,16 @@
 				C35812A428702D0800463D0F /* Extensions.swift in Sources */,
 				C35812902870276D00463D0F /* ViewController.swift in Sources */,
 				C358128C2870276D00463D0F /* AppDelegate.swift in Sources */,
+				C3476B262879AF89002F6FD0 /* SpinnerViewController.swift in Sources */,
 				C35812AC28702F2500463D0F /* CountryViewModel.swift in Sources */,
 				C39E2F5C2875C84E00C40EB3 /* APIHandler.swift in Sources */,
 				C3A4838F2872DD9E00C2BA85 /* CollegesModel.swift in Sources */,
 				C35812B428704E9500463D0F /* CountryTableViewCell.swift in Sources */,
 				C35812AF287037B400463D0F /* Constants.swift in Sources */,
-				C35812A12870287100463D0F /* ContriesModel.swift in Sources */,
+				C35812A12870287100463D0F /* CountriesModel.swift in Sources */,
 				C39E2F582875866500C40EB3 /* CollegeViewController.swift in Sources */,
 				C358128E2870276D00463D0F /* SceneDelegate.swift in Sources */,
+				C390E78428792BD900175E97 /* CollegeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
