@@ -7,21 +7,21 @@
 
 import UIKit
 
-class SpinnerViewController: UIViewController {
+class SpinnerViewController: UIView {
     
     var spinner = UIActivityIndicatorView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpSpinner()
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        setUpSpinner()
+//    }
+//
+//    private func setUpSpinner(){
+//        spinner.center = view.center
+//        view.addSubview(spinner)
+//    }
     
-    private func setUpSpinner(){
-        spinner.center = view.center
-        view.addSubview(spinner)
-    }
-    
-    func startLoadingIndicator(with style: UIActivityIndicatorView.Style, color: UIColor) {
+    func showLoading(with style: UIActivityIndicatorView.Style, color: UIColor) {
         spinner.style = style
         spinner.tag = 1
         spinner.color = color

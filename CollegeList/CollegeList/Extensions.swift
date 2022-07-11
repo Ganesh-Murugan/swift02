@@ -84,30 +84,40 @@ extension URLSession {
 //    }
 //}
 
+protocol Default {
+    static var defaultValue: Self { get }
+}
 
-extension Optional {
+extension Optional where Wrapped: Default {
+
     var unwrap: Wrapped {
         switch self {
         case .none:
-            return self.unsafelyUnwrapped
+            return Wrapped.defaultValue
         case .some(let wrapped):
-            print(wrapped)
             return wrapped
         }
-//        type(of: self)
-//        self as? String
-//        return self ?? ""
     }
 }
 
-extension String {
+extension Int: Default {
+    static var defaultValue: Int {
+        0
+    }
+}
+
+extension String: Default {
+    static var defaultValue: String {
+        ""
+    }
+    
     func customTrim() -> String {
         var result = self
         let openingBracket = self.firstIndex(of: "(")
         let closingBracket = self.firstIndex(of: ")")
         if let openingBracket = openingBracket, let closingBracket = closingBracket {
-            let index = self.index(after: closingBracket)
-            result = String(self.prefix(upTo: openingBracket) + self.suffix(from: index))
+            let endIndex = self.index(after: closingBracket)
+            result = String(self.prefix(upTo: openingBracket) + self.suffix(from: endIndex))
         }
         return result
     }
